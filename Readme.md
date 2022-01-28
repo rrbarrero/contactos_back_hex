@@ -1,3 +1,3 @@
-# Hex architecture backend for Conctactos app
+# Hexagonal architecture backend for Conctactos app
 
 New version based on hex architecture.
