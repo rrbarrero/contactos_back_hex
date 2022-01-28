@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "contactos_back_hex"
+version = "0.1.0"
+description = ""
+authors = ["Roberto Rodríguez <rbarrero@posteo.net>"]
+
+[tool.poetry.dependencies]
+python = "3.10.0"
+Flask = "^2.0.2"
+SQLAlchemy = "^1.4.31"
+alembic = "^1.7.5"
+Inject = "^4.3.1"
+dataclasses-json = "^0.5.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+python-dotenv = "^0.19.2"
+mypy = "^0.931"
+pytest-mock = "^3.6.1"
+pytest-dotenv = "^0.5.2"
+black = {version = "^21.12b0", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
