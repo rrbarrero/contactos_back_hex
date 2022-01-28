@@ -10,6 +10,7 @@ from sqlalchemy import (
     DateTime,
     func,
     select,
+    text,
 )
 
 from contactos_back.domain.colectivo import Colectivo
@@ -17,12 +18,12 @@ from contactos_back.domain.database_interface import DatabaseInterface
 
 metadata = MetaData()
 
-colectivo = Table(
+colectivos = Table(
     "colectivos",
     metadata,
     Column("id", Integer, primary_key=True),
     Column("nombre", Text, nullable=False),
-    Column("fecha_creaction", DateTime, nullable=False, server_default=func.now()),
+    Column("fecha_creacion", DateTime, nullable=False, server_default=func.now()),
     Column(
         "fecha_modificacion",
         DateTime,
@@ -34,16 +35,14 @@ colectivo = Table(
 
 
 class MySQLDatabase(DatabaseInterface):
-    def __init__(self, host: str, port: int, user: str, password: str, database: str):
-        self.engine = create_engine(
-            f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}"
-        )
+    def __init__(self, database_uri: str) -> None:
+        self.engine = create_engine(database_uri)
         self.metadata = metadata
         self.metadata.create_all(self.engine)
 
     def get_all_colectivos(self) -> List[Colectivo]:
         connection = self.engine.connect()
-        result = connection.execute(select([colectivo]))
+        result = connection.execute(text("SELECT * FROM colectivos"))
         colectivos = [
             Colectivo(
                 id=row[0],
