@@ -54,30 +54,3 @@ class MySQLDatabase(DatabaseInterface):
         ]
         connection.close()
         return colectivos
-
-    def get_colectivo(self, id: int) -> Optional[Colectivo]:
-        connection = self.engine.connect()
-        result = connection.execute(select([colectivo]).where(colectivo.c.id == id))
-        row = result.fetchone()
-        if row:
-            colectivo = Colectivo(
-                id=row[0],
-                nombre=row[1],
-                fecha_creacion=row[2],
-                fecha_modificacion=row[3],
-            )
-        else:
-            colectivo = None
-        connection.close()
-        return colectivo
-
-    def create_colectivo(self, colectivo: Colectivo) -> Colectivo:
-        connection = self.engine.connect()
-        result = connection.execute(
-            colectivo.insert().values(
-                nombre=colectivo.nombre,
-                fecha_creacion=colectivo.fecha_creacion,
-                fecha_modificacion=colectivo.fecha_modificacion,
-            )
-        )
-        colectivo.id

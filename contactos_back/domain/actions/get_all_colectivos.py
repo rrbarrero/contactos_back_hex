@@ -1,3 +1,5 @@
+from typing import List
+
 import inject
 
 from contactos_back.domain.colectivo import Colectivo
@@ -9,5 +11,5 @@ class GetAllColectivos:
     def __init__(self, database: DatabaseInterface):
         self.__database_interface = database
 
-    def execute(self) -> [Colectivo]:
+    def execute(self) -> List[Colectivo]:
         return self.__database_interface.get_all_colectivos()

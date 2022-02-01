@@ -1,3 +1,5 @@
+from typing import List
+
 from datetime import datetime
 from unittest.mock import Mock
 
@@ -20,7 +22,7 @@ def injector(database: Mock) -> None:
 
 
 @pytest.fixture
-def colectivos() -> [Colectivo]:
+def colectivos() -> List[Colectivo]:
     return [
         Colectivo(
             id=1,
@@ -39,7 +41,7 @@ def colectivos() -> [Colectivo]:
 
 class TestColectivos:
     def test_get_all_colectivos(
-        self, injector: None, database: Mock, colectivos: [Colectivo]
+        self, injector: None, database: Mock, colectivos: List[Colectivo]
     ) -> None:
         database.get_all_colectivos.return_value = colectivos
         get_all_colectivos = GetAllColectivos()

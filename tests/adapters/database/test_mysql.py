@@ -1,3 +1,4 @@
+from typing import List
 import pytest
 from sqlalchemy import literal_column
 from sqlalchemy.engine import Connection
@@ -12,7 +13,7 @@ def database(database_uri: str) -> MySQLDatabase:
 
 
 @pytest.fixture
-def colectivos_fixtures(database_connection: Connection) -> [Colectivo]:
+def colectivos_fixtures(database_connection: Connection) -> List[Colectivo]:
     database_connection.execute(
         colectivos.insert(),
         [
@@ -27,6 +28,6 @@ def colectivos_fixtures(database_connection: Connection) -> [Colectivo]:
 
 class TestMysqlAdapter:
     def test_get_colectivos(
-        self, database: MySQLDatabase, colectivos_fixtures: [Colectivo]
+        self, database: MySQLDatabase, colectivos_fixtures: List[Colectivo]
     ):
         assert database.get_all_colectivos() == colectivos_fixtures

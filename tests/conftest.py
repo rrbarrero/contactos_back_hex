@@ -2,8 +2,8 @@ import os
 from typing import Optional
 
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.engine import Connection
+from sqlalchemy import create_engine  # type: ignore
+from sqlalchemy.engine import Connection  # type: ignore
 
 from contactos_back.adapters.database.mysql import metadata
 
